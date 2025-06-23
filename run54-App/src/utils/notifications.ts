@@ -10,7 +10,8 @@ export const requestNotificationPermissions = async () => {
 export const scheduleNotification = async (
   title: string, 
   body: string, 
-  seconds: number
+  seconds: number,
+  repeats: boolean = false // Add repeats parameter with default value
 ) => {
   
   await Notifications.scheduleNotificationAsync({
@@ -20,9 +21,9 @@ export const scheduleNotification = async (
       sound: true,
     },
     trigger: {
-      // Use string literal for trigger type as per Expo Notifications API',
+      type: 'timeInterval',
       seconds, // Delay in seconds
-      repeats: false, // Set to true if you want it to repeat
+      repeats, // Set to true if you want it to repeat
     },
   });
 };
