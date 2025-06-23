@@ -19,4 +19,5 @@
     { "path": "../run54-Config" },
     { "path": "../run54-Logger" }
   ]
-    // ...other configurations...
+      // ...other configurations...
+    }
