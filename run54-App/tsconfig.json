@@ -15,9 +15,7 @@
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts"],
   "references": [
-    { "path": "../run54-Common" },
-    { "path": "../run54-Config" },
-    { "path": "../run54-Logger" }
+
   ]
       // ...other configurations...
     }
