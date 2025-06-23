@@ -7,16 +7,23 @@ export const requestNotificationPermissions = async () => {
 };
 
 // Schedule a notification at a specific time
-export const scheduleNotification = async (title: string, body: string, trigger: Date) => {
+export const scheduleNotification = async (
+  title: string, 
+  body: string, 
+  seconds: number
+) => {
+  
   await Notifications.scheduleNotificationAsync({
     content: {
       title,
       body,
       sound: true,
     },
-    trigger: trigger instanceof Date
-      ? { type: Notifications.TriggerType.TIME, date: trigger }
-      : trigger,
+    trigger: {
+      // Use string literal for trigger type as per Expo Notifications API',
+      seconds, // Delay in seconds
+      repeats: false, // Set to true if you want it to repeat
+    },
   });
 };
 

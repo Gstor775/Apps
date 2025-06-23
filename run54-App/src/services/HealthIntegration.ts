@@ -1,5 +1,5 @@
 import { Platform } from 'react-native';
-import { Health } from 'react-native-health'; // Example library for health integration
+import Health from 'react-native-health'; // Example library for health integration
 import { PermissionsAndroid } from 'react-native';
 
 const HealthIntegration = {
@@ -44,7 +44,7 @@ const HealthIntegration = {
     };
 
     return new Promise((resolve, reject) => {
-      Health.getHeartRate(options, (err, results) => {
+      Health.getHeartRateSamples(options, (err, results) => {
         if (err) {
           reject(err);
         } else {
