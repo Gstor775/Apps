@@ -15,15 +15,21 @@ const HistoryScreen = () => {
     fetchHistory();
   }, []);
 
-  const renderItem = ({ item }: { item: Workout }) => (
+  const renderItem = ({ item, index }: { item: Workout; index: number }) => (
     <View style={styles.item}>
-      <Text style={styles.date}>{typeof item.date === 'string' ? item.date : item.date.toString()}</Text>
-      <Text>Distance: {(item.distance).toFixed(2)} km</Text>
-      <Text>Time: {typeof item.elapsedTime === 'string'
-        ? item.elapsedTime
-        : `${item.elapsedTime.hours}h ${item.elapsedTime.minutes}m ${item.elapsedTime.seconds}s`}</Text>
-      <Text>Avg Pace: {item.avgPace?.toFixed(2)} min/km</Text>
-      <Text>Calories: {item.caloriesBurned}</Text>
+      <Text style={styles.date}>
+        {typeof item.date === 'string' ? item.date : item.date?.toString() || 'No date'}
+      </Text>
+      <Text>Distance: {item.distance ? item.distance.toFixed(2) : '0.00'} km</Text>
+      <Text>
+        Time: {typeof item.elapsedTime === 'string'
+          ? item.elapsedTime
+          : item.elapsedTime
+            ? `${item.elapsedTime.hours}h ${item.elapsedTime.minutes}m ${item.elapsedTime.seconds}s`
+            : 'N/A'}
+      </Text>
+      <Text>Avg Pace: {item.avgPace !== undefined ? item.avgPace.toFixed(2) : 'N/A'} min/km</Text>
+      <Text>Calories: {item.caloriesBurned ?? 'N/A'}</Text>
     </View>
   );
 
@@ -35,19 +41,32 @@ const HistoryScreen = () => {
       ) : (
         <FlatList
           data={history}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item, idx) => item.id?.toString() || idx.toString()}
           renderItem={renderItem}
         />
       )}
     </View>
   );
 };
-
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16 },
-  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 12 },
-  item: { marginBottom: 16, padding: 12, backgroundColor: '#f0f0f0', borderRadius: 8 },
-  date: { fontWeight: 'bold', marginBottom: 4 },
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: '#fff',
+  },
+  title: {
+    fontSize: 24,     
+  },
+  item: {
+    padding: 12,
+    marginVertical: 8,
+    backgroundColor: '#f2f2f2',
+    borderRadius: 8,
+  },
+  date: {
+    fontWeight: 'bold',
+    marginBottom: 4,
+  },
 });
 
 export default HistoryScreen;
