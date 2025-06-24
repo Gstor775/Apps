@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 
-import type { StackNavigationProp } from '@react-navigation/stack';
+import type { StackNavigationProp } from '@react-navigation/stack' with { 'resolution-mode': 'import' };
 
 type RootStackParamList = {
     RunScreen: undefined;
